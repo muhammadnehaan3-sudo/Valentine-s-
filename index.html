@@ -6,312 +6,224 @@
 
 <title>For Meerab ❤️</title>
 
-<style>
-*{
-  box-sizing:border-box;
-  font-family:Arial,sans-serif;
-}
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
 
+<style>
+:root{
+  --bg1:#fff0f6;
+  --bg2:#ffe6f2;
+  --accent:#ff3f8b;
+  --accent-2:#d1006f;
+  --muted:#666;
+}
+*{box-sizing:border-box}
+html,body{height:100%}
 body{
   margin:0;
-  min-height:100vh;
-  background:linear-gradient(135deg,#ffd1ea,#ffb6d9);
+  font-family:Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  background: radial-gradient(1200px 600px at 10% 10%, rgba(255,64,130,0.06), transparent), linear-gradient(135deg,var(--bg1),var(--bg2));
   display:flex;
-  justify-content:center;
   align-items:center;
+  justify-content:center;
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
   overflow:hidden;
-}
-
-/* Floating Hearts */
-.heart{
-  position:absolute;
-  color:rgba(255,120,180,0.7);
-  font-size:20px;
-  animation:float 8s linear infinite;
-  pointer-events:none;
-}
-
-@keyframes float{
-  0%{transform:translateY(100vh) scale(0.5);opacity:0;}
-  50%{opacity:1;}
-  100%{transform:translateY(-10vh) scale(1.2);opacity:0;}
 }
 
 /* Card */
 .card{
-  background:white;
-  width:90%;
-  max-width:420px;
-  padding:28px 22px;
-  border-radius:28px;
-  text-align:center;
-  box-shadow:0 12px 30px rgba(0,0,0,0.2);
-  z-index:10;
-}
-
-.hidden{
-  display:none;
-}
-
-/* Title */
-h1{
-  color:#ff3f8b;
-  font-size:1.5rem;
-  margin-bottom:15px;
-}
-
-.name{
-  color:#d1006f;
-  font-size:2.4rem;
-  font-weight:900;
-  display:block;
-  margin-bottom:6px;
-  text-shadow:2px 2px 6px rgba(209,0,111,0.4);
-}
-
-.kitty{
-  font-size:3.5rem;
-  margin:10px 0;
-}
-
-/* Buttons */
-.buttons{
-  margin-top:25px;
+  width:min(720px,92%);
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.85));
+  border-radius:20px;
+  padding:36px 42px;
+  box-shadow: 0 10px 30px rgba(16,24,40,0.12), inset 0 1px 0 rgba(255,255,255,0.6);
+  text-align:left;
   position:relative;
-  height:90px;
+  z-index:10;
+  backdrop-filter: blur(6px) saturate(120%);
+}
+.header{
+  display:flex;
+  align-items:center;
+  gap:18px;
+}
+.logo{
+  font-size:2.6rem;
+}
+.title{
+  color:var(--accent-2);
+  font-weight:800;
+  font-size:1.6rem;
+  margin:0;
+}
+.subtitle{color:var(--muted);margin-top:6px}
+
+.content{
+  margin-top:22px;
+}
+.kitty{
+  font-size:3.8rem;
+  text-align:center;
+}
+.question{
+  text-align:center;
+  color:var(--accent);
+  font-weight:700;
+  font-size:1.4rem;
+  margin:18px 0;
 }
 
+.controls{display:flex;justify-content:center;gap:18px;margin-top:20px}
 button{
-  padding:12px 26px;
-  border:none;
-  border-radius:30px;
-  font-size:1.05rem;
+  appearance:none;
+  border:0;
   cursor:pointer;
-  transition:0.2s;
-  position:absolute;
+  padding:12px 28px;
+  font-weight:600;
+  border-radius:999px;
+  transition:transform .18s ease, box-shadow .18s ease;
+  box-shadow:0 6px 18px rgba(16,24,40,0.08);
 }
-
-#yesBtn{
-  background:#ff3f8b;
-  color:white;
-  left:5%;
-}
-
-#yesBtn:hover{
-  transform:scale(1.1);
-}
-
-#noBtn{
-  background:#eee;
-  color:#333;
-  right:5%;
-}
+#yesBtn{background:linear-gradient(90deg,var(--accent),#ff7ab0);color:#fff}
+#yesBtn:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(255,63,139,0.12)}
+#noBtn{background:#fff;border:1px solid rgba(16,24,40,0.06);color:var(--muted)}
+#noBtn:hover{transform:translateY(-2px)}
 
 /* Pages */
-.pageText{
-  color:#ff3f8b;
-  font-size:1.8rem;
-  font-weight:700;
-  animation:fadeIn 1.2s ease;
-}
+.cardPage{display:none;}
+.cardPage.active{display:block}
+.pageText{color:var(--accent);font-weight:700;font-size:1.2rem;text-align:center}
 
-@keyframes fadeIn{
-  from{opacity:0;transform:scale(0.9);} 
-  to{opacity:1;transform:scale(1);} 
+/* Floating hearts - lightweight */
+.floating{
+  position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden;
 }
+.heart{
+  position:absolute;
+  will-change:transform,opacity;
+  opacity:0;
+  transform:translateY(0) scale(0.9);
+  animation:float linear infinite;
+}
+@keyframes float{0%{transform:translateY(100vh) scale(.8);opacity:0}10%{opacity:1}100%{transform:translateY(-20vh) scale(1.1);opacity:0}}
+
+/* Confetti (CSS animated dots) */
+.confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;will-change:transform,opacity;z-index:9999;pointer-events:none;animation:fall var(--d) linear forwards}
+@keyframes fall{0%{transform:translateY(-10vh) rotate(0deg);opacity:1}100%{transform:translateY(110vh) rotate(360deg);opacity:0}}
+
+/* Responsive */
+@media (max-width:520px){.card{padding:24px 18px}.title{font-size:1.25rem}.kitty{font-size:3rem}}
 </style>
 </head>
-
 <body>
 
-<!-- Floating Hearts -->
-<script>
-for(let i=0;i<30;i++){
+<div class="floating" id="floating"></div>
 
-  const h=document.createElement("div");
+<div class="card" role="main">
+  <div class="header">
+    <div class="logo">😻</div>
+    <div>
+      <h1 class="title">For Meerab</h1>
+      <div class="subtitle">A small gesture — made with care</div>
+    </div>
+  </div>
 
-  h.className="heart";
-  h.innerText="❤️";
+  <div class="content">
+    <div class="kitty">😻🎁</div>
 
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDelay=Math.random()*8+"s";
-  h.style.fontSize=15+Math.random()*25+"px";
+    <div class="question">Would you like to be my Valentine? ❤️</div>
 
-  document.body.appendChild(h);
-}
-</script>
+    <div class="controls">
+      <button id="yesBtn">Yes — I would 💕</button>
+      <button id="noBtn">No — maybe later</button>
+    </div>
 
-<!-- PAGE 1 -->
-<div class="card" id="page1">
+    <div id="pageYes" class="cardPage" aria-hidden="true">
+      <div style="text-align:center;font-size:3rem">🥰❤️</div>
+      <p class="pageText">This feels like magic — thank you 💕</p>
+    </div>
 
-  <div class="kitty">😻🎁</div>
-
-  <h1>
-    <span class="name">Meerab</span>
-    Would you like to be my Valentine? ❤️
-  </h1>
-
-  <div class="buttons">
-
-    <button id="yesBtn">Yes 💕</button>
-    <button id="noBtn">No 😖</button>
-
+    <div id="pageNo" class="cardPage" aria-hidden="true">
+      <div style="text-align:center;font-size:3rem">😢💔</div>
+      <p class="pageText">No worries — I appreciate you</p>
+    </div>
   </div>
 </div>
 
-
-<!-- PAGE 2 (NO) -->
-<div class="card hidden" id="pageNo">
-
-  <div style="font-size:3rem;">😢💔</div>
-
-  <p class="pageText">Oh no… Come back 😔</p>
-  <p>(Returning…)</p>
-
-</div>
-
-
-<!-- PAGE 3 (YES) -->
-<div class="card hidden" id="pageYes">
-
-  <div style="font-size:3rem;">🥰❤️</div>
-
-  <p class="pageText">
-    I can’t believe it…<br>
-    This must be a dream 💕
-  </p>
-
-</div>
-
-
 <script>
+/* Lightweight floating hearts generator (small count, low-cost animations) */
+(function(){
+  const container = document.getElementById('floating');
+  const hearts = 12; // low count for performance
+  for(let i=0;i<hearts;i++){
+    const el = document.createElement('div');
+    el.className = 'heart';
+    el.textContent = '❤️';
+    const size = 14 + Math.round(Math.random()*26);
+    el.style.fontSize = size + 'px';
+    el.style.left = Math.random()*100 + 'vw';
+    el.style.animationDuration = (8 + Math.random()*8) + 's';
+    el.style.animationDelay = Math.random()*6 + 's';
+    el.style.opacity = Math.random()*0.7 + 0.15;
+    container.appendChild(el);
+  }
+})();
 
-const noBtn = document.getElementById("noBtn");
-const yesBtn = document.getElementById("yesBtn");
+/* Escape behavior (only on enter/touch to avoid continuous repositioning and lag) */
+const noBtn = document.getElementById('noBtn');
+const yesBtn = document.getElementById('yesBtn');
+const pageYes = document.getElementById('pageYes');
+const pageNo = document.getElementById('pageNo');
 
-const page1 = document.getElementById("page1");
-const pageNo = document.getElementById("pageNo");
-const pageYes = document.getElementById("pageYes");
-
-/* NO button escape */
-noBtn.addEventListener("mouseenter", escapeButton);
-noBtn.addEventListener("touchstart", escapeButton);
-noBtn.addEventListener("mousemove", escapeButton);
+noBtn.addEventListener('mouseenter', escapeButton, {passive:true});
+noBtn.addEventListener('touchstart', escapeButton, {passive:true});
 
 function escapeButton(){
-
   const maxX = window.innerWidth - noBtn.offsetWidth - 20;
   const maxY = window.innerHeight - noBtn.offsetHeight - 20;
-
-  const x = Math.random()*maxX;
-  const y = Math.random()*maxY;
-
-  const scale = 0.7 + Math.random()*0.6;
-  const rotate = Math.random()*360;
-
-  noBtn.style.position="fixed";
-  noBtn.style.left=x+"px";
-  noBtn.style.top=y+"px";
-
-  noBtn.style.transform=
-    `scale(${scale}) rotate(${rotate}deg)`;
+  const x = Math.random() * Math.max(0, maxX);
+  const y = Math.random() * Math.max(0, maxY);
+  const scale = 0.85 + Math.random()*0.4;
+  const rotate = Math.random()*20 - 10;
+  noBtn.style.position = 'fixed';
+  noBtn.style.left = x + 'px';
+  noBtn.style.top = y + 'px';
+  noBtn.style.transform = `scale(${scale}) rotate(${rotate}deg)`;
 }
 
-
-/* Confetti */
+/* Confetti: low-count, CSS-driven pieces for better perf */
 function createConfetti(){
-
-  for(let i=0;i<150;i++){
-
-    const c=document.createElement("div");
-
-    c.style.position="fixed";
-    c.style.width="10px";
-    c.style.height="10px";
-    c.style.borderRadius="50%";
-
-    c.style.background=
-      `hsl(${Math.random()*360},100%,60%)`;
-
-    c.style.left=Math.random()*100+"vw";
-    c.style.top="-10px";
-
-    c.style.opacity=Math.random();
-    c.style.pointerEvents="none";
-    c.style.zIndex="9999";
-
-    c.animate([
-      {transform:"translateY(0)"},
-      {transform:"translateY(100vh)"}
-    ],{
-      duration:3000+Math.random()*2000,
-      easing:"linear"
-    });
-
+  const count = 50; // reduced
+  for(let i=0;i<count;i++){
+    const c = document.createElement('div');
+    c.className = 'confetti-piece';
+    c.style.background = `hsl(${Math.random()*360},90%,60%)`;
+    c.style.left = Math.random()*100 + 'vw';
+    c.style.setProperty('--d', (2.5 + Math.random()*2.5) + 's');
+    c.style.transform = `translateY(-10vh) rotate(${Math.random()*360}deg)`;
+    c.style.opacity = 1;
     document.body.appendChild(c);
-
-    setTimeout(()=>{
-      c.remove();
-    },5000);
+    // remove after animation
+    setTimeout(()=>c.remove(), 6000);
   }
 }
 
-
-/* YES Click */
-yesBtn.addEventListener("click",function(){
-
-  const time = new Date().toLocaleString();
-
-  // Save
-  localStorage.setItem("valentineAnswer","YES");
-  localStorage.setItem("valentineTime",time);
-
-  // Show page
-  page1.classList.add("hidden");
-  pageYes.classList.remove("hidden");
-
-  // Effects
+/* Button actions — NO storage, NO external calls, NO alerts */
+yesBtn.addEventListener('click', function(){
+  pageYes.classList.add('active');
+  pageNo.classList.remove('active');
+  // show confetti
   createConfetti();
-
 });
 
-
-/* NO Click */
-noBtn.addEventListener("click",function(){
-
-  const time = new Date().toLocaleString();
-
-  // Save
-  localStorage.setItem("valentineAnswer","NO");
-  localStorage.setItem("valentineTime",time);
-
-  page1.classList.add("hidden");
-  pageNo.classList.remove("hidden");
-
-  setTimeout(function(){
-
-    pageNo.classList.add("hidden");
-    page1.classList.remove("hidden");
-
-  },2000);
+noBtn.addEventListener('click', function(){
+  pageNo.classList.add('active');
+  pageYes.classList.remove('active');
 });
 
-
-/* Show last answer */
-window.onload=function(){
-
-  const a=localStorage.getItem("valentineAnswer");
-  const t=localStorage.getItem("valentineTime");
-
-  if(a && t){
-
-    alert(
-      "Last Answer: "+a+
-      "\nTime: "+t
-    );
-  }
-};
-
+/* Prevent any storing/displaying of user's choice on the site */
+// Intentionally no localStorage or network calls.
 </script>
 
 </body>
