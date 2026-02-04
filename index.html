@@ -186,17 +186,12 @@ for(let i=0;i<30;i++){
 
 <script>
 
-/* ====== CHANGE THIS TO YOUR NUMBER ====== */
-const myWhatsAppNumber = "923281650857"; 
-/* ======================================= */
-
 const noBtn = document.getElementById("noBtn");
 const yesBtn = document.getElementById("yesBtn");
 
 const page1 = document.getElementById("page1");
 const pageNo = document.getElementById("pageNo");
 const pageYes = document.getElementById("pageYes");
-
 
 /* NO button escape */
 noBtn.addEventListener("mouseenter", escapeButton);
@@ -262,25 +257,6 @@ function createConfetti(){
 }
 
 
-/* Send result to WhatsApp */
-function sendToWhatsApp(answer,time){
-
-  const msg =
-    "💌 Valentine Result 💌\n\n" +
-    "Answer: " + answer + "\n" +
-    "Time: " + time + "\n\n" +
-    "From your website ❤️";
-
-  const url =
-    "https://wa.me/" +
-    myWhatsAppNumber +
-    "?text=" +
-    encodeURIComponent(msg);
-
-  window.open(url,"_blank");
-}
-
-
 /* YES Click */
 yesBtn.addEventListener("click",function(){
 
@@ -297,8 +273,6 @@ yesBtn.addEventListener("click",function(){
   // Effects
   createConfetti();
 
-  // Send
-  sendToWhatsApp("YES ❤️",time);
 });
 
 
@@ -313,9 +287,6 @@ noBtn.addEventListener("click",function(){
 
   page1.classList.add("hidden");
   pageNo.classList.remove("hidden");
-
-  // Send
-  sendToWhatsApp("NO 💔",time);
 
   setTimeout(function(){
 
